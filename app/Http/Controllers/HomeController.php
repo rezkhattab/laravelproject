@@ -22,6 +22,16 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+
+
+        //$request = new Request;
+        if (isset($_POST)){
+//            $passport = new \App\Comments;
+//            $passport->comment = $request->get('comment');
+//            $passport->postid = $request->get('postid');
+//            $passport->ownerid = $request->get('ownerid');
+//            $passport->save();
+        }
         $posts = DB::table('users')
                 ->join('posts', 'users.id', '=', 'posts.ownerid')
                 ->select('posts.*', 'users.name')
@@ -30,13 +40,15 @@ class HomeController extends Controller {
         return view('home', array('posts' => $posts));
     }
 
-    public function store(Request $request) {
-        $passport = new \App\Posts;
-        $passport->title = $request->get('title');
-        $passport->post = $request->get('post');
-        $passport->ownerid = $request->get('ownerid');
-        $passport->save();
-        return redirect('posts')->with('success', 'Information has been added');
+    public function addcomment(Request $request) {
+
+        
+        $posts = DB::table('users')
+                ->join('posts', 'users.id', '=', 'posts.ownerid')
+                ->select('posts.*', 'users.name')
+                ->orderBy('posts.id', 'desc')
+                ->get();
+        return view('home', array('posts' => $posts));
     }
 
 }

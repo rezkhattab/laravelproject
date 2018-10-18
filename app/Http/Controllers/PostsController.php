@@ -9,6 +9,7 @@ class PostsController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('gender');
     }
 
     //
@@ -38,7 +39,7 @@ class PostsController extends Controller {
 
     public function index() {
         $posts = DB::table('posts')
-                ->where('ownerid','1')
+                ->where('ownerid',\Auth::user()->id)
                 ->get();
         //$posts = \App\Posts::all();
         return view('blog.index',  array ( 'posts' => $posts ));

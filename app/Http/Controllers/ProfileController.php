@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Illuminate\Http\Request;
+use DB;
 
-class SocialController extends Controller {
+class ProfileController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
-        $this->middleware('gender');
     }
 
     /**
@@ -18,19 +17,7 @@ class SocialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = DB::table('users')
-                ->join('posts', 'users.id', '=', 'posts.ownerid')
-                ->select('posts.*', 'users.name')
-                ->orderBy('posts.id', 'desc')
-                ->get();
-
-        $posts = array('posts' => $posts);
-        $posts2 = (array) $posts;
-
-        foreach ($posts as $key => $value) {
-            $value = (array) $value;
-        }
-        return view('social.index', $posts);
+        //
     }
 
     /**
@@ -49,12 +36,7 @@ class SocialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $passport = new \App\Comments;
-        $passport->comment = $request->get('comment');
-        $passport->postid = $request->get('postid');
-        $passport->ownerid = $request->get('ownerid');
-        $passport->save();
-        return redirect('social')->with('success', 'Information has been added');
+        //
     }
 
     /**
@@ -74,7 +56,8 @@ class SocialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $profile = \App\User::find($id);
+        return view('profile.edit', compact('profile', 'id'));
     }
 
     /**
@@ -85,7 +68,14 @@ class SocialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        $profile = \App\User::find($id);
+        $profile->name = $request->get('name');
+        $profile->email = $request->get('email');
+        $profile->gender = $request->get('gender');
+        $profile->nationalid = $request->get('nationalid');
+        $profile->password = bcrypt($request->get('password'));
+        $profile->save();
+        return redirect('social');
     }
 
     /**
