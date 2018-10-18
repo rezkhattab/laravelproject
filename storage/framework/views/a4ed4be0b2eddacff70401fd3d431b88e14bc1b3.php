@@ -28,7 +28,9 @@
                         </button>
 
                         <!-- Branding Image -->
-                        <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">Timeline</a>
+                        <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">Home</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="navbar-brand" href="<?php echo e(url('/social')); ?>">Timeline</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="navbar-brand" href="<?php echo e(url('/posts')); ?>">My posts</a>
                     </div>
@@ -63,6 +65,11 @@
                                             <?php echo e(csrf_field()); ?>
 
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo e(url('/profile')); ?>/<?php echo e(Auth::user()->id); ?>/edit">
+                                            Profile
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

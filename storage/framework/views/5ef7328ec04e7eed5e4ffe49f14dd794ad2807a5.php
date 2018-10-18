@@ -13,35 +13,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td>
                                     <table>
                                         <tr>
-                                            <td><b> <?php echo e($post->title); ?></b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="background-color: #4CAF50;"><b>Posted By: <?php echo e($post->name); ?></b></td>
-                                        </tr>
-                                        <tr>
-                                            <td><?php echo e($post->post); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <form action="<?php echo e(url('posts', [$post->id])); ?>" method="POST">
-                                                    <?php echo e(method_field('DELETE')); ?>
-
-                                                    <?php echo e(csrf_field()); ?>
-
-                                                    <input type="text" class="form-control" name="comment" required value="">
-                                                    <button class="btn btn-danger" type="submit">Comment</button>
-                                                </form>
+                                            <td>                
+                                                <div class="panel-heading">Welcome to social task</div>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>

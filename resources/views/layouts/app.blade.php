@@ -28,7 +28,9 @@
                         </button>
 
                         <!-- Branding Image -->
-                        <a class="navbar-brand" href="{{ url('/home') }}">Timeline</a>
+                        <a class="navbar-brand" href="{{ url('/home') }}">Home</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="navbar-brand" href="{{ url('/social') }}">Timeline</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="navbar-brand" href="{{ url('/posts') }}">My posts</a>
                     </div>
@@ -62,6 +64,11 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/profile') }}/{{ Auth::user()->id }}/edit">
+                                            Profile
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

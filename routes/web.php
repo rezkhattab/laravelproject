@@ -19,7 +19,12 @@ Route::get('/', function () {
 });
 
 Route::resource('posts','PostsController');
+Route::resource('social','SocialController');
+Route::resource('profile','ProfileController');
+Route::resource('home','HomeController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home/addcomment', 'HomeController@addcomment');
+
